@@ -38,7 +38,6 @@ const CLIENT_LOGOS = [
   "/brands/tecglass.png", 
   "/brands/trebol.png",
   "/brands/valcarce.png",
-
   "/brands/vinos-de-arganza-logo.png"
   
 ];
