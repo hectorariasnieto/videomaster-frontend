@@ -13,7 +13,7 @@ const CLIENT_LOGOS = [
   "/brands/TeleMadrid.svg.png",
   "/brands/Endesa.svg.png",
   "/brands/FCC.png",
-  "/brands/Bergidum logo.png",
+  "/brands/Bergidum-logo.png",
   "/brands/Ayto_Madrid.png",
   "/brands/Ayto_Ponferrada.png",
   "/brands/ciuden.png",
