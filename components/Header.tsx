@@ -88,13 +88,10 @@ export default function Header() {
             className="text-white text-2xl font-bold tracking-wider relative z-[60]" 
             onClick={closeMenu}
           >
-            VIDEOMASTER<span className="text-red-600">.</span>
+            VIDEOMASTER
           </Link>
 
           <nav className="hidden md:flex gap-8 text-white text-sm font-medium">
-            <Link href="/" className="hover:text-red-500 transition-colors">
-              HOME
-            </Link>
             <Link href="/proyectos" className="hover:text-red-500 transition-colors">
               PROYECTOS
             </Link>

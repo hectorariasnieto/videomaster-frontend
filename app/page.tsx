@@ -21,12 +21,21 @@ export default function Home() {
         </video>
         <div className="absolute top-0 left-0 w-full h-full bg-black/40 z-10 pointer-events-none"></div>
         <div className="relative z-20 text-center animate-fade-in-up">
-          <h1 className="text-6xl md:text-9xl font-bold text-white tracking-[0.2em] drop-shadow-2xl">
+          <img src="/logoVM.svg" alt="Videomaster Producciones"/>
+            <p className="text-xl md:text-4xl text-white mt-6 tracking-widest uppercase font-light drop-shadow-md">
+              VIDEOMASTER
+            <br/>
+              PRODUCCIONES
+            </p>
+          {
+          /*<h1 className="text-6xl md:text-9xl font-bold text-white tracking-[0.2em] drop-shadow-2xl">
             VIDEOMASTER<span className="text-red-600">.</span>
-          </h1>
+          </h1> 
           <p className="text-xl md:text-2xl text-gray-300 mt-6 tracking-widest uppercase font-light drop-shadow-md">
             Productora Audiovisual
           </p>
+          */
+          }
         </div>
       </section>
 

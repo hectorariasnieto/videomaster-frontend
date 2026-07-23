@@ -19,7 +19,7 @@ export default function Footer() {
           {/* Parte Izquierda: Logo y Texto centrado */}
           <div className="flex flex-col items-center gap-3">
             <Link href="/" className="text-white text-3xl font-bold tracking-wider">
-              VIDEOMASTER<span className="text-red-600">.</span>
+              VIDEOMASTER
             </Link>
             <div className="text-zinc-400 font-medium tracking-widest text-sm leading-relaxed text-center">
               VIDEOMASTER <br />

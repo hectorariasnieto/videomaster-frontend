@@ -17,7 +17,7 @@ export default function FeaturedProjects() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   return (
-    <section className="w-full bg-zinc-950 py-32 px-6">
+    <section className="w-full bg-black/95 py-32 px-6">
       <div className="max-w-7xl mx-auto">
         <FadeInSection>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-12 text-center">
