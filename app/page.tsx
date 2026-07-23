@@ -40,15 +40,6 @@ export default function Home() {
             En Videomaster transformamos ideas en piezas audiovisuales de alto impacto. 
             No solo grabamos imágenes, capturamos la esencia de tu marca para emocionar a tu audiencia.
           </p>
-        </FadeInSection>
-      </section>
-
-      {/* --- SECCIÓN 3: SEGUNDO TEXTO FADE-IN --- */}
-      <section className="w-full h-screen bg-zinc-900 flex items-center justify-center px-6">
-        <FadeInSection className="max-w-4xl text-center">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">
-            Tecnología y <span className="text-red-600">creatividad</span>.
-          </h2>
           <p className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed">
             Utilizamos equipos de última generación y las técnicas de postproducción más avanzadas. 
             Desde el guion hasta el color final, cuidamos cada detalle con calidad de cine.
@@ -56,16 +47,16 @@ export default function Home() {
         </FadeInSection>
       </section>
 
-      {/* --- SECCIÓN 4: PROYECTOS DESTACADOS --- */}
+      {/* --- SECCIÓN 3: PROYECTOS DESTACADOS --- */}
       <FeaturedProjects />
 
-      {/* --- SECCIÓN 5: CONTADORES ANIMADOS --- */}
+      {/* --- SECCIÓN 4: CONTADORES ANIMADOS --- */}
       <Counters />
 
-      {/* --- SECCIÓN 6: CLIENTES --- */}
+      {/* --- SECCIÓN 5: CLIENTES --- */}
       <Clients />
 
-      {/* --- SECCIÓN 7: SERVICIOS --- */}
+      {/* --- SECCIÓN 6: SERVICIOS --- */}
       <Services />
 
       

@@ -3,24 +3,24 @@ import { Film, MonitorPlay, Clapperboard, Video } from "lucide-react";
 
 const SERVICES = [
   {
+    icon: <Clapperboard className="w-12 h-12 text-red-600 mb-6" />,
+    title: "Vídeo Corporativo",
+    desc: "Transmitimos los valores de tu empresa con vídeos internos, testimoniales y documentales de marca."
+  },
+  {
+    icon: <Video className="w-12 h-12 text-red-600 mb-6" />,
+    title: "Institucional y Eventos",
+    desc: "Capturamos la esencia de tus eventos corporativos, festivales y conciertos con equipos multicámara."
+  },
+  {
     icon: <Film className="w-12 h-12 text-red-600 mb-6" />,
     title: "Producción Comercial",
     desc: "Spots publicitarios de alto impacto visual diseñados para campañas de televisión y medios digitales."
   },
   {
-    icon: <Video className="w-12 h-12 text-red-600 mb-6" />,
-    title: "Cobertura de Eventos",
-    desc: "Capturamos la esencia de tus eventos corporativos, festivales y conciertos con equipos multicámara."
-  },
-  {
     icon: <MonitorPlay className="w-12 h-12 text-red-600 mb-6" />,
     title: "Postproducción",
     desc: "Edición avanzada, etalonaje, diseño sonoro y efectos visuales para llevar tus vídeos al siguiente nivel."
-  },
-  {
-    icon: <Clapperboard className="w-12 h-12 text-red-600 mb-6" />,
-    title: "Vídeo Corporativo",
-    desc: "Transmitimos los valores de tu empresa con vídeos internos, testimoniales y documentales de marca."
   }
 ];
 

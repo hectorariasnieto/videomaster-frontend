@@ -5,6 +5,26 @@ import FadeInSection from "./FadeInSection";
 import { Play, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Función para convertir links normales en links de inserción (embed)
+const getEmbedUrl = (url: string) => {
+  if (!url) return "";
+  
+  // Detectar YouTube
+  const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&]{11})/);
+  if (ytMatch && ytMatch[1]) {
+    return `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1`;
+  }
+  
+  // Detectar Vimeo
+  const vimeoMatch = url.match(/vimeo\.com\/(?:video\/)?([0-9]+)/);
+  if (vimeoMatch && vimeoMatch[1]) {
+    return `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1`;
+  }
+  
+  // Si no es YouTube ni Vimeo, devolvemos la URL tal cual (para archivos .mp4)
+  return url;
+};
+
 // Definimos la estructura que esperamos recibir del servidor
 export default function ProjectsFilter({ projects }: { projects: any[] }) {
   const [activeCategory, setActiveCategory] = useState("Todos");
@@ -15,18 +35,22 @@ export default function ProjectsFilter({ projects }: { projects: any[] }) {
     if (!projects) return [];
     
     return projects.map((p) => {
-      const { Titulo, VideoURL, Categoria, Miniatura } = p.attributes;
+      // Extraemos los datos dependiendo de si vienen anidados (v4) o planos (v5)
+      const projectData = p.attributes || p;
+      const { Titulo, VideoURL, Categoria, Miniatura } = projectData;
       
-      // Construimos la URL de la imagen local de Strapi
-      const imageUrl = Miniatura?.data?.attributes?.url 
-        ? `http://localhost:1337${Miniatura.data.attributes.url}` 
+      // Construimos la URL buscando la ruta correcta según la versión
+      const miniaturaUrl = Miniatura?.url || Miniatura?.data?.attributes?.url;
+      const imageUrl = miniaturaUrl 
+        ? `http://localhost:1337${miniaturaUrl}` 
         : "/placeholder.png";
       
       return {
-        id: p.id,
-        title: Titulo,
+        // Usamos el id, o documentId que es el nuevo estándar en algunas versiones
+        id: p.id || p.documentId || Math.random(), 
+        title: Titulo || "Sin Título",
         video: VideoURL,
-        category: Categoria || "Sin Categoría", // Fallback por si algún proyecto no tiene categoría
+        category: Categoria || "Sin Categoría",
         thumb: imageUrl
       };
     });
@@ -110,7 +134,7 @@ export default function ProjectsFilter({ projects }: { projects: any[] }) {
         </AnimatePresence>
       </motion.div>
 
-      {/* Overlay del Vídeo */}
+{/* Overlay del Vídeo */}
       {activeVideo && (
         <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4">
           <button 
@@ -119,12 +143,22 @@ export default function ProjectsFilter({ projects }: { projects: any[] }) {
           >
             <X className="w-10 h-10" />
           </button>
-          <video 
-            src={activeVideo} 
-            controls 
-            autoPlay 
-            className="w-full max-w-5xl aspect-video rounded shadow-2xl"
-          />
+          
+          {activeVideo.includes("youtu") || activeVideo.includes("vimeo") ? (
+            <iframe 
+              src={getEmbedUrl(activeVideo)} 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full max-w-5xl aspect-video rounded shadow-2xl border-0"
+            />
+          ) : (
+            <video 
+              src={activeVideo} 
+              controls 
+              autoPlay 
+              className="w-full max-w-5xl aspect-video rounded shadow-2xl"
+            />
+          )}
         </div>
       )}
     </>

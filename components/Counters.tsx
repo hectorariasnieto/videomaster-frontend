@@ -10,23 +10,23 @@ export default function Counters() {
         
         <FadeInSection>
           <div className="text-6xl font-black mb-4 tracking-tighter">
-            <CountUp end={250} duration={3} enableScrollSpy scrollSpyOnce />+
+            <CountUp end={300} duration={3} enableScrollSpy scrollSpyOnce />+
           </div>
-          <p className="text-red-200 text-lg font-medium uppercase tracking-widest">Proyectos Entregados</p>
+          <p className="text-red-200 text-lg font-medium uppercase tracking-widest">Clientes / Amigos</p>
         </FadeInSection>
 
         <FadeInSection>
           <div className="text-6xl font-black mb-4 tracking-tighter">
-            <CountUp end={15} duration={3} enableScrollSpy scrollSpyOnce />
+            <CountUp end={40} duration={3} enableScrollSpy scrollSpyOnce />
           </div>
           <p className="text-red-200 text-lg font-medium uppercase tracking-widest">Años de Experiencia</p>
         </FadeInSection>
 
         <FadeInSection>
           <div className="text-6xl font-black mb-4 tracking-tighter">
-            <CountUp end={40} duration={3} enableScrollSpy scrollSpyOnce />+
+            <CountUp end={150} duration={3} enableScrollSpy scrollSpyOnce />K+
           </div>
-          <p className="text-red-200 text-lg font-medium uppercase tracking-widest">Premios Ganados</p>
+          <p className="text-red-200 text-lg font-medium uppercase tracking-widest">Horas de Grabación</p>
         </FadeInSection>
 
       </div>

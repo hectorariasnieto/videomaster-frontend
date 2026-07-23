@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Videomaster TV | Productora Audiovisual",
+  title: "Videomaster Producciones | Productora Audiovisual",
   description: "Creamos contenido audiovisual de alto impacto.",
 };
 
