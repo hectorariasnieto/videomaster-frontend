@@ -16,6 +16,19 @@ export default function Header() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  // NUEVO: Escuchador para el evento del Footer
+  useEffect(() => {
+    const listenForModal = () => {
+      setIsMobileMenuOpen(false); // Cierra el menú móvil por si acaso
+      setIsContactOpen(true);     // Abre el modal
+      setIsSuccess(false);        // Resetea el mensaje de éxito
+    };
+
+    window.addEventListener("openContactModal", listenForModal);
+    return () => window.removeEventListener("openContactModal", listenForModal);
+  }, []);
+
+  // Escuchador del scroll original
   useEffect(() => {
     const handleScroll = () => {
       if (pathname === "/") {

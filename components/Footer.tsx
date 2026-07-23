@@ -1,49 +1,85 @@
+"use client";
+
 import Link from "next/link";
-import { Mail } from "lucide-react"; // Solo importamos el icono de Mail de lucide
+import { Mail } from "lucide-react";
 
 export default function Footer() {
+  // Función que dispara el evento para que el Header lo escuche y abra el modal
+  const handleOpenContact = () => {
+    window.dispatchEvent(new Event("openContactModal"));
+  };
+
   return (
-    <footer className="w-full bg-black py-12 px-6 border-t border-zinc-900">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+    <footer className="bg-zinc-950 border-t border-zinc-900 py-12 px-6 z-10 relative">
+      <div className="max-w-7xl mx-auto flex flex-col gap-10">
         
-        {/* Logo de la compañía */}
-        <Link href="/" className="text-white text-2xl font-bold tracking-wider">
-          VIDEOMASTER<span className="text-red-600">.</span>
-        </Link>
-
-        {/* Texto legal / Copyright */}
-        <p className="text-zinc-500 text-sm text-center md:text-left font-light">
-          © {new Date().getFullYear()} Videomaster TV. Todos los derechos reservados.
-        </p>
-
-        {/* Redes sociales y Contacto */}
-        <div className="flex gap-6">
+        {/* ROW 1: Logo y Datos de Contacto */}
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
           
-          {/* Icono SVG de Instagram */}
-          <a href="#" aria-label="Instagram" className="text-zinc-500 hover:text-red-500 transition-colors">
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-          </a>
-          
-          {/* Icono SVG de LinkedIn */}
-          <a href="#" aria-label="LinkedIn" className="text-zinc-500 hover:text-red-500 transition-colors">
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-              <rect x="2" y="9" width="4" height="12"></rect>
-              <circle cx="4" cy="4" r="2"></circle>
-            </svg>
-          </a>
+          {/* Parte Izquierda: Logo y Texto centrado */}
+          <div className="flex flex-col items-center gap-3">
+            <Link href="/" className="text-white text-3xl font-bold tracking-wider">
+              VIDEOMASTER<span className="text-red-600">.</span>
+            </Link>
+            <div className="text-zinc-400 font-medium tracking-widest text-sm leading-relaxed text-center">
+              VIDEOMASTER <br />
+              PRODUCCIONES
+            </div>
+          </div>
 
-          {/* Icono de Mail (Este sí sigue en Lucide) */}
-          <Link href="/contacto" aria-label="Contacto" className="text-zinc-500 hover:text-red-500 transition-colors">
-            <Mail className="w-5 h-5" />
-          </Link>
-          
+          {/* Parte Derecha: Datos físicos */}
+          <div className="flex flex-col items-center md:items-end text-zinc-400 text-sm font-light gap-2">
+            <p>Plaza Julio Lazúrtegui 10, 1C, Ponferrada</p>
+            <p>+34 600 696 191</p>
+            <a href="mailto:producciones@videomaster.tv" className="hover:text-white transition-colors">
+              producciones@videomaster.tv
+            </a>
+          </div>
         </div>
-        
+
+        {/* ROW 2: Copyright y Redes */}
+        <div className="pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-zinc-600 text-xs text-center md:text-left">
+            © 2026 Videomaster TV. Todos los derechos reservados.
+          </p>
+          
+          <div className="flex items-center gap-6 text-zinc-400">
+            {/* El enlace de YouTube (pon aquí tu canal real) */}
+            <a 
+              href="https://www.youtube.com/c/VIDEOMASTERProducciones" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-red-600 transition-colors"
+              aria-label="Canal de YouTube"
+            >
+              <svg 
+  xmlns="http://www.w3.org/2000/svg" 
+  width="24" 
+  height="24" 
+  viewBox="0 0 24 24" 
+  fill="none" 
+  stroke="currentColor" 
+  strokeWidth="2" 
+  strokeLinecap="round" 
+  strokeLinejoin="round" 
+  className="w-6 h-6"
+>
+  <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
+  <path d="m10 15 5-3-5-3z" />
+</svg>
+            </a>
+            
+            {/* El botón que abre el modal de contacto */}
+            <button 
+              onClick={handleOpenContact} 
+              className="hover:text-red-600 transition-colors cursor-pointer" 
+              aria-label="Abrir formulario de contacto"
+            >
+              <Mail className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+
       </div>
     </footer>
   );
