@@ -56,7 +56,7 @@ export default function FeaturedProjects() {
 
       {/* Overlay del Vídeo (Modal) */}
       {activeVideo && (
-        <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-100 bg-black/95 flex items-center justify-center p-4">
           <button 
             onClick={() => setActiveVideo(null)}
             className="absolute top-8 right-8 text-white hover:text-red-600 transition-colors"

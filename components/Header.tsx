@@ -85,7 +85,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link 
             href="/" 
-            className="text-white text-2xl font-bold tracking-wider relative z-[60]" 
+            className="text-white text-2xl font-bold tracking-wider relative z-60" 
             onClick={closeMenu}
           >
             VIDEOMASTER
@@ -104,7 +104,7 @@ export default function Header() {
           </nav>
 
           <button 
-            className="md:hidden text-white relative z-[60] p-2"
+            className="md:hidden text-white relative z-60 p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Alternar menú"
           >
@@ -135,7 +135,7 @@ export default function Header() {
       </div>
 
       {isContactOpen && (
-        <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-100 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-zinc-900 w-full max-w-lg rounded-2xl p-8 md:p-12 relative border border-zinc-800 shadow-2xl animate-fade-in-up">
             
             <button 
