@@ -12,23 +12,20 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   
-  // Estados para el envío del formulario
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // NUEVO: Escuchador para el evento del Footer
   useEffect(() => {
     const listenForModal = () => {
-      setIsMobileMenuOpen(false); // Cierra el menú móvil por si acaso
-      setIsContactOpen(true);     // Abre el modal
-      setIsSuccess(false);        // Resetea el mensaje de éxito
+      setIsMobileMenuOpen(false);
+      setIsContactOpen(true);
+      setIsSuccess(false);
     };
 
     window.addEventListener("openContactModal", listenForModal);
     return () => window.removeEventListener("openContactModal", listenForModal);
   }, []);
 
-  // Escuchador del scroll original
   useEffect(() => {
     const handleScroll = () => {
       if (pathname === "/") {
@@ -52,7 +49,7 @@ export default function Header() {
   const handleOpenContact = () => {
     setIsMobileMenuOpen(false);
     setIsContactOpen(true);
-    setIsSuccess(false); // Reseteamos el mensaje de éxito al abrir de nuevo
+    setIsSuccess(false);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -66,7 +63,6 @@ export default function Header() {
 
     if (response.success) {
       setIsSuccess(true);
-      // Cerramos el modal automáticamente tras 3 segundos
       setTimeout(() => {
         setIsContactOpen(false);
       }, 3000);
@@ -85,16 +81,17 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link 
             href="/" 
-            className="text-white text-2xl font-bold tracking-wider relative z-60" 
+            className="text-white text-2xl font-bold tracking-wider relative z-[60]" 
             onClick={closeMenu}
           >
-            VIDEOMASTER
+            VIDEOMASTER<span className="text-red-600">.</span>
           </Link>
 
+          {/* NAVEGACIÓN DESKTOP (Añadido "LA PRODUCTORA") */}
           <nav className="hidden md:flex gap-8 text-white text-sm font-medium">
-            <Link href="/proyectos" className="hover:text-red-500 transition-colors">
-              PROYECTOS
-            </Link>
+            <Link href="/" className="hover:text-red-500 transition-colors">HOME</Link>
+            <Link href="/la-productora" className="hover:text-red-500 transition-colors">LA PRODUCTORA</Link>
+            <Link href="/proyectos" className="hover:text-red-500 transition-colors">PROYECTOS</Link>
             <button 
               onClick={handleOpenContact} 
               className="hover:text-red-500 transition-colors uppercase"
@@ -104,7 +101,7 @@ export default function Header() {
           </nav>
 
           <button 
-            className="md:hidden text-white relative z-60 p-2"
+            className="md:hidden text-white relative z-[60] p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Alternar menú"
           >
@@ -113,18 +110,16 @@ export default function Header() {
         </div>
       </header>
 
+      {/* NAVEGACIÓN MÓVIL (Añadido "LA PRODUCTORA") */}
       <div 
         className={`fixed inset-0 bg-zinc-950 z-40 flex flex-col items-center justify-center transition-all duration-300 md:hidden ${
           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
         }`}
       >
         <nav className="flex flex-col gap-10 text-white text-3xl font-medium text-center tracking-widest">
-          <Link href="/" className="hover:text-red-500 transition-colors" onClick={closeMenu}>
-            HOME
-          </Link>
-          <Link href="/proyectos" className="hover:text-red-500 transition-colors" onClick={closeMenu}>
-            PROYECTOS
-          </Link>
+          <Link href="/" className="hover:text-red-500 transition-colors" onClick={closeMenu}>HOME</Link>
+          <Link href="/la-productora" className="hover:text-red-500 transition-colors" onClick={closeMenu}>LA PRODUCTORA</Link>
+          <Link href="/proyectos" className="hover:text-red-500 transition-colors" onClick={closeMenu}>PROYECTOS</Link>
           <button 
             onClick={handleOpenContact} 
             className="hover:text-red-500 transition-colors uppercase tracking-widest"
@@ -134,10 +129,10 @@ export default function Header() {
         </nav>
       </div>
 
+      {/* OVERLAY DEL FORMULARIO DE CONTACTO */}
       {isContactOpen && (
-        <div className="fixed inset-0 z-100 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-zinc-900 w-full max-w-lg rounded-2xl p-8 md:p-12 relative border border-zinc-800 shadow-2xl animate-fade-in-up">
-            
             <button 
               onClick={() => setIsContactOpen(false)}
               className="absolute top-6 right-6 text-zinc-400 hover:text-white transition-colors"
@@ -159,64 +154,22 @@ export default function Header() {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                   <div>
                     <label htmlFor="nombre" className="block text-sm font-medium text-zinc-400 mb-1">Nombre</label>
-                    <input 
-                      type="text" 
-                      id="nombre" 
-                      name="nombre"
-                      required
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600 transition-colors"
-                      placeholder="Tu nombre o empresa"
-                    />
+                    <input type="text" id="nombre" name="nombre" required className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600 transition-colors" placeholder="Tu nombre o empresa" />
                   </div>
-
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-zinc-400 mb-1">Email</label>
-                    <input 
-                      type="email" 
-                      id="email" 
-                      name="email"
-                      required
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600 transition-colors"
-                      placeholder="hola@ejemplo.com"
-                    />
+                    <input type="email" id="email" name="email" required className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600 transition-colors" placeholder="hola@ejemplo.com" />
                   </div>
-
                   <div>
                     <label htmlFor="telefono" className="block text-sm font-medium text-zinc-400 mb-1">Teléfono</label>
-                    <input 
-                      type="tel" 
-                      id="telefono" 
-                      name="telefono"
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600 transition-colors"
-                      placeholder="+34 600 000 000"
-                    />
+                    <input type="tel" id="telefono" name="telefono" className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600 transition-colors" placeholder="+34 600 000 000" />
                   </div>
-
                   <div>
                     <label htmlFor="proyecto" className="block text-sm font-medium text-zinc-400 mb-1">Cuéntanos tu proyecto</label>
-                    <textarea 
-                      id="proyecto" 
-                      name="proyecto"
-                      rows={4}
-                      required
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600 transition-colors resize-none"
-                      placeholder="Detalles sobre el estilo, presupuesto, fechas..."
-                    ></textarea>
+                    <textarea id="proyecto" name="proyecto" rows={4} required className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600 transition-colors resize-none" placeholder="Detalles sobre el estilo, presupuesto, fechas..."></textarea>
                   </div>
-
-                  <button 
-                    type="submit" 
-                    disabled={isSubmitting}
-                    className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-lg mt-2 transition-colors uppercase tracking-widest text-sm flex justify-center items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        Enviando...
-                      </>
-                    ) : (
-                      "Enviar Mensaje"
-                    )}
+                  <button type="submit" disabled={isSubmitting} className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-lg mt-2 transition-colors uppercase tracking-widest text-sm flex justify-center items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                    {isSubmitting ? <><Loader2 className="w-5 h-5 animate-spin" /> Enviando...</> : "Enviar Mensaje"}
                   </button>
                 </form>
               </>
