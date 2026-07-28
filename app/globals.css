@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 
-/* Animación personalizada para el texto del Hero */
+/* Animación texto del Hero */
 @keyframes fade-in-up {
   0% {
     opacity: 0;

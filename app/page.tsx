@@ -34,7 +34,7 @@ export default function Home() {
       <section className="w-full h-screen bg-zinc-950 flex items-center justify-center px-6">
         <FadeInSection className="max-w-4xl text-center">
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">
-            Contamos historias que <span className="text-red-600">conectan</span>.
+            Contamos historias que <span className="text-red-600">conectan</span>
           </h2>
           <p className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed">
             En Videomaster transformamos ideas en piezas audiovisuales de alto impacto. 
