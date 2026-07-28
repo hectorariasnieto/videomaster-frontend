@@ -35,9 +35,6 @@ export default function LaProductoraPage() {
   return (
     <main className="min-h-screen bg-black text-white selection:bg-red-600 selection:text-white">
       
-      {/* =========================================
-          SECCIONES ESTILO DGNL.CO (Sticky Scroll)
-          ========================================= */}
       <div className="pt-20">
         
         {/* SECCIÓN 1: Quiénes Somos (Título Izquierda, Texto Derecha) */}
@@ -57,7 +54,7 @@ export default function LaProductoraPage() {
               </div>
             </div>
 
-            {/* Texto que hace Scroll */}
+            {/* Texto en Scroll */}
             <div className="md:w-1/2 pt-12 md:pt-[40vh] flex flex-col gap-12 md:pl-16">
               <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-3xl md:text-5xl font-light leading-snug text-zinc-300">
                 <span className="text-white font-medium">Desde 1985,</span> hemos estado a la vanguardia de la producción audiovisual.
@@ -73,7 +70,7 @@ export default function LaProductoraPage() {
         <section className="relative w-full border-b border-zinc-900/50">
           <div className="max-w-[95%] mx-auto px-4 md:px-8 flex flex-col md:flex-row pb-32 md:pb-64">
             
-            {/* Texto que hace Scroll */}
+            {/* Texto en Sroll */}
             <div className="md:w-1/2 order-2 md:order-1 pt-12 md:pt-[40vh] flex flex-col gap-12 md:pr-16">
               <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-3xl md:text-5xl font-light leading-snug text-zinc-300">
                 Un equilibrio exacto entre <span className="text-red-600 font-medium">innovación y experiencia.</span>

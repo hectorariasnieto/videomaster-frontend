@@ -27,15 +27,6 @@ export default function Home() {
             <br/>
               PRODUCCIONES
             </p>
-          {
-          /*<h1 className="text-6xl md:text-9xl font-bold text-white tracking-[0.2em] drop-shadow-2xl">
-            VIDEOMASTER<span className="text-red-600">.</span>
-          </h1> 
-          <p className="text-xl md:text-2xl text-gray-300 mt-6 tracking-widest uppercase font-light drop-shadow-md">
-            Productora Audiovisual
-          </p>
-          */
-          }
         </div>
       </section>
 
@@ -67,7 +58,6 @@ export default function Home() {
 
       {/* --- SECCIÓN 6: SERVICIOS --- */}
       <Services />
-
       
     </main>
   );

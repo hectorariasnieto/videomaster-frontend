@@ -2,26 +2,36 @@ import FadeInSection from "@/components/FadeInSection";
 import ProjectsFilter from "@/components/ProjectsFilter";
 
 // Función del servidor para pedir los datos a Strapi
-async function getProjects() {
+async function getData() {
   try {
-    // populate=* incluye las imágenes de las miniaturas en la respuesta
-    const res = await fetch("http://localhost:1337/api/proyectos?populate=*", {
-      cache: "no-store", // Desactiva la caché para ver los cambios de Strapi al instante
+    // 1. Obtenemos los proyectos con sus imágenes y categorías
+    const resProyectos = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/proyectos?populate=*`, {
+      cache: "no-store", 
     });
     
-    if (!res.ok) throw new Error("Fallo al cargar proyectos");
+    // 2. Obtenemos las categorías ordenadas por el cliente
+    const resCategorias = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/categorias?sort=Orden:asc`, {
+      cache: "no-store",
+    });
     
-    const json = await res.json();
-    return json.data; 
+    if (!resProyectos.ok) throw new Error("Fallo al cargar proyectos");
+    
+    const jsonProyectos = await resProyectos.json();
+    const jsonCategorias = await resCategorias.json();
+
+    return {
+      projects: jsonProyectos.data || [],
+      categories: jsonCategorias.data || []
+    };
   } catch (error) {
     console.error(error);
-    return [];
+    return { projects: [], categories: [] };
   }
 }
 
 export default async function ProyectosPage() {
-  // Descargamos los proyectos reales desde Strapi antes de renderizar la página
-  const projects = await getProjects();
+  // Descargamos los datos reales desde Strapi antes de renderizar la página
+  const { projects, categories } = await getData();
 
   return (
     <main className="w-full min-h-screen bg-zinc-950 pt-32 pb-24 px-6">
@@ -36,8 +46,8 @@ export default async function ProyectosPage() {
           </p>
         </FadeInSection>
 
-        {/* Le inyectamos los datos al componente interactivo */}
-        <ProjectsFilter projects={projects} />
+        {/* Le inyectamos proyectos y categorías al componente interactivo */}
+        <ProjectsFilter projects={projects} categories={categories} />
         
       </div>
     </main>

@@ -25,41 +25,61 @@ const getEmbedUrl = (url: string) => {
   return url;
 };
 
-// Definimos la estructura que esperamos recibir del servidor
-export default function ProjectsFilter({ projects }: { projects: any[] }) {
+// Definimos la estructura que esperamos recibir del servidor (Añadiendo categories)
+export default function ProjectsFilter({ projects, categories }: { projects: any[], categories: any[] }) {
   const [activeCategory, setActiveCategory] = useState("Todos");
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
-  // 1. Formateamos los datos de Strapi para que sean más fáciles de usar
+  // Menú respetando estrictamente el orden en Strapi
+  const CATEGORIES = useMemo(() => {
+    if (!categories || categories.length === 0) return ["Todos"];
+    
+    const strapiCategories = categories.map((c) => {
+      const catData = c.attributes || c;
+      return catData.Nombre;
+    });
+
+    return ["Todos", ...strapiCategories];
+  }, [categories]);
+
+  // Formateo de datos de Strapi
   const formattedProjects = useMemo(() => {
     if (!projects) return [];
     
     return projects.map((p) => {
-      // Extraemos los datos dependiendo de si vienen anidados (v4) o planos (v5)
       const projectData = p.attributes || p;
-      const { Titulo, VideoURL, Categoria, Miniatura } = projectData;
+      const { Titulo, VideoURL, Miniatura, categorias } = projectData;
       
-      // Construimos la URL buscando la ruta correcta según la versión
+      let categoryName = "Sin Categoría";
+
+      // Extraemos la primera posición.
+      if (categorias) {
+        const catArray = categorias.data || categorias;
+        if (Array.isArray(catArray) && catArray.length > 0) {
+          const firstCat = catArray[0].attributes || catArray[0];
+          categoryName = firstCat.Nombre || "Sin Categoría";
+        }
+      }
+      
       const miniaturaUrl = Miniatura?.url || Miniatura?.data?.attributes?.url;
+      
+      // Variable de entorno para las imágenes
       const imageUrl = miniaturaUrl 
-        ? `http://localhost:1337${miniaturaUrl}` 
+        ? `${process.env.NEXT_PUBLIC_STRAPI_URL || ''}${miniaturaUrl}` 
         : "/placeholder.png";
       
       return {
-        // Usamos el id, o documentId que es el nuevo estándar en algunas versiones
         id: p.id || p.documentId || Math.random(), 
         title: Titulo || "Sin Título",
         video: VideoURL,
-        category: Categoria || "Sin Categoría",
+        category: categoryName,
         thumb: imageUrl
       };
     });
   }, [projects]);
 
-  // 2. Extraemos las categorías únicas automáticamente
-  const CATEGORIES = ["Todos", ...Array.from(new Set(formattedProjects.map(p => p.category)))];
 
-  // 3. Filtramos según la pestaña activa
+  // Filtramos según la pestaña activa
   const filteredProjects = activeCategory === "Todos" 
     ? formattedProjects 
     : formattedProjects.filter(project => project.category === activeCategory);
@@ -134,7 +154,7 @@ export default function ProjectsFilter({ projects }: { projects: any[] }) {
         </AnimatePresence>
       </motion.div>
 
-{/* Overlay del Vídeo */}
+      {/* Overlay del Vídeo */}
       {activeVideo && (
         <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4">
           <button 

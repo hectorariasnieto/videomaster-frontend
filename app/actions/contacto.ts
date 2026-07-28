@@ -11,8 +11,8 @@ export async function enviarMensaje(formData: FormData) {
   };
 
   try {
-    // 1. Guardar copia de seguridad en Strapi
-    const strapiRes = await fetch("http://localhost:1337/api/mensajes", {
+    // 1. Guardar copia de seguridad en Strapi usando la variable de entorno
+    const strapiRes = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/mensajes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

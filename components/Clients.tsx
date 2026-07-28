@@ -76,7 +76,7 @@ export default function Clients() {
           ))}
         </div>
 
-        {/* --- VERSIÓN MÓVIL: Carrusel de 4 elementos --- */}
+        {/* --- VERSIÓN MOBILE : Carrusel de 4 elementos --- */}
         <div className="md:hidden flex flex-col items-center">
           <div className="grid grid-cols-2 gap-8 mb-8 w-full place-items-center">
             {mobileVisibleLogos.map((logo, index) => (

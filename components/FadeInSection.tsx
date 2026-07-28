@@ -1,4 +1,4 @@
-"use client"; // Necesario porque Framer Motion usa hooks del navegador (useEffect, useRef)
+"use client"; // OJO: Framer Motion usa hooks useEffect, useRef
 
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
