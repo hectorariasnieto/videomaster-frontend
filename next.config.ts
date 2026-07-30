@@ -10,11 +10,9 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        // Si alguien entra en la antigua URL...
         source: '/la-empresa',
-        // ...lo llevamos a la nueva
         destination: '/la-productora',
-        permanent: true, // Esto es el 301 (vital para SEO)
+        permanent: true,
       },
       {
         source: '/galeria-de-videos',
@@ -22,7 +20,16 @@ const nextConfig = {
         permanent: true,
       },
       {
-        // Páginas antiguas que ya no existen, las mandamos a la Home o a Productora
+        source: '/portfolio',
+        destination: '/proyectos',
+        permanent: true,
+      },
+      {
+        source: '/portfolio/:path*',
+        destination: '/proyectos',
+        permanent: true,
+      },
+      {
         source: '/nuestros-equipos',
         destination: '/la-productora',
         permanent: true,
@@ -33,10 +40,35 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/category/a-la-venta/',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/category/novedades/',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/contacto',
+        destination: '/',
+        permanent: true,
+      },
+
+
+
+
+
+      {
         source: '/novedades',
         destination: '/proyectos',
         permanent: true,
       }
+
+
+
+
+
     ];
   },
 };
